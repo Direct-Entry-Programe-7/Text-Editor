@@ -6,7 +6,7 @@ A simple Java FX Application to edit find and replace contents on a document.
 
 1. Clone the repository first 
 
-````
+``https://github.com/Direct-Entry-Programe-7/Text-Editor.git``
 
 2. Once cloned, open the repository from the IntelliJ IDEA
 
