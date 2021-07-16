@@ -1,3 +1,11 @@
+/*
+ *  Copyright (c) Nethmina Senarathne. All rights reserved.
+ *
+ *   Licensed under the MIT License. See License.txt in the project root for license
+ *   information.
+ *
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
