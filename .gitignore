@@ -1,7 +1,5 @@
 *.iml
 out/
 .idea/
-application.properties
-3-Simple Text Editor.iml
-Text-Editor.iml
+
 

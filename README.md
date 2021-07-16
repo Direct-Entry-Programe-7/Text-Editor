@@ -2,7 +2,7 @@
 
 A simple Java FX Application to edit find and replace contents of a document.
 
-![](/home/nethmina/Pictures/app Screenshot.png)
+![](./Screenshot/app Screenshot.png)
 
 ## Built With
 
