@@ -1,15 +1,25 @@
+/*
+ *  Copyright (c) Nethmina Senarathne. All rights reserved.
+ *
+ *   Licensed under the MIT License. See License.txt in the project root for license
+ *   information.
+ *
+ */
+
 package controller;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 
-import java.io.FilterOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -23,6 +33,7 @@ public class EditFormController {
     public AnchorPane pneReplace;
     public TextField txtReplace;
     public TextField txtSearch1;
+    String text;
 
     private int findOffset = -1;
     private List<Index> searchList = new ArrayList<>();
@@ -31,6 +42,7 @@ public class EditFormController {
     public void initialize (){
         pneSearch.setVisible(false);
         pneReplace.setVisible(false);
+        this.text = txtEditor.getText();
 
         txtSearch.textProperty().addListener(new TextListener(txtEditor,searchList));
         txtSearch1.textProperty().addListener(new TextListener(txtEditor,searchList));
@@ -38,6 +50,7 @@ public class EditFormController {
     }
 
     public void searchMatches(String query) {
+
         try {
             Pattern regExp = Pattern.compile(query, Pattern.CASE_INSENSITIVE);
             Matcher matcher = regExp.matcher(txtEditor.getText());
@@ -84,6 +97,7 @@ public class EditFormController {
     }
 
     public void SelectAll_OnAction(ActionEvent actionEvent) {
+
         txtEditor.selectAll();
     }
 
@@ -123,7 +137,57 @@ public class EditFormController {
         }
     }
 
+    public void mnuFileOpen_OnAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.getExtensionFilters().add
+                (new FileChooser.ExtensionFilter("All Text Files", "*.txt", "*.html"));
+        fileChooser.getExtensionFilters().add
+                (new FileChooser.ExtensionFilter("All Files", "*"));
+        File file = fileChooser.showOpenDialog(txtEditor.getScene().getWindow());
+
+        if (file == null) return;
+
+        txtEditor.clear();
+        try (FileReader fileReader = new FileReader(file);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null){
+                txtEditor.appendText(line + '\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void mnuSave_OnAction(ActionEvent actionEvent) {
+        if (!text.equals(txtEditor.getText())) {
+            text = txtEditor.getText();
+            saveFile();
+        }
+    }
+
+    private void saveFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        File file = fileChooser.showSaveDialog(txtEditor.getScene().getWindow());
+
+        if (file == null) return;
+
+        try (FileWriter fileWriter = new FileWriter(file);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            bufferedWriter.write(txtEditor.getText());
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Can't save the file", ButtonType.CLOSE).show();
+        }
+    }
+
+    public void mnuSaveAs_OnAction(ActionEvent actionEvent) {
+        saveFile();
+    }
+
+    public void mnuPrint_OnAction(ActionEvent actionEvent) {
 
     }
 
@@ -164,7 +228,6 @@ class TextListener implements ChangeListener<String> {
     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
         searchMatches(newValue);
     }
-
 
 }
 
