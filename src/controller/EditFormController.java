@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
@@ -34,6 +35,7 @@ public class EditFormController {
     public TextField txtReplace;
     public TextField txtSearch1;
     String text;
+    private PrinterJob printerJob;
 
     private int findOffset = -1;
     private List<Index> searchList = new ArrayList<>();
@@ -43,6 +45,7 @@ public class EditFormController {
         pneSearch.setVisible(false);
         pneReplace.setVisible(false);
         this.text = txtEditor.getText();
+        this.printerJob = PrinterJob.createPrinterJob();
 
         txtSearch.textProperty().addListener(new TextListener(txtEditor,searchList));
         txtSearch1.textProperty().addListener(new TextListener(txtEditor,searchList));
@@ -188,10 +191,14 @@ public class EditFormController {
     }
 
     public void mnuPrint_OnAction(ActionEvent actionEvent) {
-
+        boolean printDialog = printerJob.showPrintDialog(txtEditor.getScene().getWindow());
+        if (printDialog){
+            printerJob.printPage(txtEditor.lookup("Text"));
+        }
     }
 
     public void mnuPageSetup_OnAction(ActionEvent actionEvent) {
+        printerJob.showPageSetupDialog(txtEditor.getScene().getWindow());
     }
 
     public void mnuAbout_OnAction(ActionEvent actionEvent) {
