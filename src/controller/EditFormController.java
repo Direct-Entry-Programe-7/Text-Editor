@@ -191,6 +191,13 @@ public class EditFormController {
 
     }
 
+    public void mnuPageSetup_OnAction(ActionEvent actionEvent) {
+    }
+
+    public void mnuAbout_OnAction(ActionEvent actionEvent) {
+        new Alert(Alert.AlertType.INFORMATION, "Developed By Nethmina", ButtonType.OK).show();
+    }
+
     static class Index {
     int startingIndex;
     int endIndex;
