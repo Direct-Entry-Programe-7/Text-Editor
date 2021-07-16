@@ -2,7 +2,7 @@
 
 A simple Java FX Application to edit find and replace contents of a document.
 
-![](./Screenshot/app Screenshot.png)
+![screenshot](./Screenshot/app Screenshot.png)
 
 ## Built With
 
@@ -20,9 +20,8 @@ A simple Java FX Application to edit find and replace contents of a document.
 
 ## Contact
 
-Nethmina Senarathne- [LinkedIn](https://www.linkedin.com/in/neth
-mina-senarathne-7527a6148/) <br>
-pethumjeewantha4@gmail.com
+Nethmina Senarathne- [LinkedIn](https://www.linkedin.com/in/nethmina-senarathne-7527a6148/) <br>
+
 
 ## License
 
