@@ -1,6 +1,6 @@
 # TEXT EDITOR
 
-A simple Java FX Application to edit find and replace contents of a document.
+A simple **Java FX Application** to edit find and replace the contents of a document.
 
 ![screenshot](./Screenshot/app Screenshot.png)
 
@@ -20,7 +20,7 @@ A simple Java FX Application to edit find and replace contents of a document.
 
 ## Contact
 
-Nethmina Senarathne- [LinkedIn](https://www.linkedin.com/in/nethmina-senarathne-7527a6148/) <br>
+Nethmina Senarathne- [LinkedIn](https://www.linkedin.com/in/nethmina-senarathne-7527a6148/)
 
 
 ## License
